@@ -6,8 +6,46 @@
 <body>
 
 	<h1>TOP</h1>
+	<h2>app1</h2>
 	<div id="app1">
 		{{ message }}
+	</div>
+
+	<h2>app2</h2>
+	<div id="app2">
+		<span v-bind:title="message">
+			hover your mouse over me for a few seconds to see my dynamically bound title!
+		</span>
+	</div>
+
+	<style>
+		.app3-visible-hdiden {
+			visibility: hidden;
+		}
+	</style>
+	<h2>app3</h2>
+	<div id="app3">
+		<p v-if="seen1">now you see me</p>
+		<p v-if="seen2">now you do not see me</p>
+		<p v-if="seen3">click button</p>
+		<p v-show="seen4">click button</p>
+		<p :class="{'app3-visible-hdiden':seen5}">click button</p>
+		<button v-on:click="button1">button</button>
+		<button v-on:click="button2">button</button>
+		<button v-on:click="button3">button</button>
+	</div>
+
+	<h2>app4</h2>
+	<div id="app4">
+		<ul>
+			<li v-for="text in texts">{{ text.text }}</li>
+		</ul>
+	</div>
+
+	<h2>app5</h2>
+	<div id="app5">
+		<p>{{ message }}</p>
+		<button v-on:click="reverseMessage">Reverse Message</button>
 	</div>
 
 	<script>
@@ -17,6 +55,59 @@
 			message: 'Hello Vue!'
 		}
 	});
+
+	var app2 = new Vue({
+		el: '#app2',
+		data: {
+			message: 'You loaded this page on ' + new Date()
+		}
+	});
+
+	var app3 = new Vue({
+		el: '#app3',
+		data: {
+			seen1: true,
+			seen2: false,
+			seen3: true,
+			seen4: true,
+			seen5: true,
+		},
+		methods: {
+			button1: function() {
+				this.seen3 = !this.seen3;
+			},
+			button2: function() {
+				this.seen4 = !this.seen4;
+			},
+			button3: function() {
+				this.seen5 = !this.seen5;
+			}
+		}
+	});
+
+	var app4 = new Vue({
+		el: '#app4',
+		data: {
+			texts: [
+				{text: 'text 1'},
+				{text: 'text 2'},
+				{text: 'text 3'},
+			]
+		}
+	});
+
+	var app5 = new Vue({
+		el: '#app5',
+		data: {
+			message: 'Hello Vue.js!'
+		},
+		methods: {
+			reverseMessage: function () {
+				this.message = this.message.split('').reverse().join('')
+			}
+		}
+	});
+
 	</script>
 </body>
 </html>
