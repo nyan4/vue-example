@@ -48,6 +48,12 @@
 		<button v-on:click="reverseMessage">Reverse Message</button>
 	</div>
 
+	<h2>app6</h2>
+	<div id="app6">
+		<p>{{ message }}</p>
+		<input v-model="message">
+	</div>
+
 	<script>
 	var app1 = new Vue({
 		el: '#app1',
@@ -105,6 +111,13 @@
 			reverseMessage: function () {
 				this.message = this.message.split('').reverse().join('')
 			}
+		}
+	});
+
+	var app6 = new Vue({
+		el: "#app6",
+		data: {
+			message: "hellow Vue!"
 		}
 	});
 
